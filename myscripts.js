@@ -51,7 +51,7 @@ function createGrid(size){
 
             // add the event listener for each div
 
-            newDiv.addEventListener("mouseover",() => newDiv.setAttribute("style","background: blue"));
+            newDiv.addEventListener("mouseover",() => newDiv.setAttribute("style","background: green"));
 
             divContainerRow.appendChild(newDiv);
         }
