@@ -1,6 +1,8 @@
-const divsContainer = document.querySelector("#container");
-let sizeGrid = 16;
 
+const container = document.querySelector("#container");
+const divsContainer = document.querySelector("#gridContainer");
+
+let sizeGrid = 16;
 
 function removeAllChild(size){
 
@@ -16,7 +18,7 @@ function removeAllChild(size){
 
 }
 
-const newGridButton = document.createElement("button");
+const newGridButton = document.querySelector("#gridSizeButton");
 newGridButton.textContent = "New Grid";
 newGridButton.addEventListener("click",() => {
             
@@ -35,8 +37,6 @@ newGridButton.addEventListener("click",() => {
     
 });
 
-divsContainer.appendChild(newGridButton);
-
 function createGrid(size){
 
     sizeGrid = size;
@@ -51,7 +51,7 @@ function createGrid(size){
 
             // add the event listener for each div
 
-            newDiv.addEventListener("mouseover",() => newDiv.setAttribute("style","background: green"));
+            newDiv.addEventListener("mouseover",() => newDiv.setAttribute("style",`background: ${colorDiv}`));
 
             divContainerRow.appendChild(newDiv);
         }
@@ -62,4 +62,36 @@ function createGrid(size){
 }
 
 createGrid(16);
+
+// creating the color list for the user
+const color = document.querySelector("#color");
+
+const label = document.createElement("label");
+label.textContent = "Select a color:   ";
+const listColors = document.createElement("select");
+listColors.setAttribute("name","colors");
+listColors.setAttribute("id","colors");
+
+label.setAttribute("for","colors");
+
+const colorsName = ["red", "green", "blue", "orange", "brown", "black", "yellow", "pink"];
+
+let colorDiv = "red";
+
+for(let i = 0; i < colorsName.length; i++){
+    
+    const colorItem = document.createElement("option");
+    colorItem.value = colorsName[i];
+    colorItem.textContent = colorsName[i];
+    listColors.appendChild(colorItem);
+
+}
+
+listColors.addEventListener("click", () => colorDiv = listColors.value);
+color.appendChild(label);
+color.appendChild(listColors);
+
+
+
+
 

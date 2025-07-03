@@ -1,13 +1,28 @@
+h1{
+    text-align: center;
+}
 #container{
+    display: flex;
+    flex-direction: column;
+}
+
+#gridContainer{
     width:960px;
     height: 960px;
     display: flex;
     flex-direction: column;
-    margin: 0px auto;
+    margin: 10px auto;
+}
+
+.userOptions{
+    display: flex;
+    margin: 10px auto;
+    gap: 50px;
 }
 
 
 .divRow{
+
     display:flex;
     flex-direction: row;
     flex:1;
