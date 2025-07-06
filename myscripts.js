@@ -51,7 +51,28 @@ function createGrid(size){
 
             // add the event listener for each div
 
-            newDiv.addEventListener("mouseover",() => newDiv.setAttribute("style",`background: ${colorDiv}`));
+            newDiv.addEventListener("mouseover",() => {
+               
+                let newColorDiv = colorDiv;
+                if(colorDiv === "random"){
+                    
+                    let nextColorIsTheSame = true;
+                    while(nextColorIsTheSame){
+
+                        newColorDiv = colorsName[Math.floor(Math.random() * 8)];
+                        if(newColorDiv !== previousColorDiv)
+                            nextColorIsTheSame = false;
+
+                    }
+                    previousColorDiv = newColorDiv;
+                   
+                }
+                newDiv.setAttribute("style",`background-color: ${newColorDiv}; opacity: ${opacity} `);     
+                if(opacity < 1)
+                    opacity += 0.1; 
+                
+                
+            });
 
             divContainerRow.appendChild(newDiv);
         }
@@ -74,9 +95,11 @@ listColors.setAttribute("id","colors");
 
 label.setAttribute("for","colors");
 
-const colorsName = ["red", "green", "blue", "orange", "brown", "black", "yellow", "pink"];
+const colorsName = ["red", "green", "blue", "orange", "brown", "black", "yellow", "pink","random"];
 
 let colorDiv = "red";
+let previousColorDiv = "red";
+
 
 for(let i = 0; i < colorsName.length; i++){
     
@@ -87,9 +110,34 @@ for(let i = 0; i < colorsName.length; i++){
 
 }
 
-listColors.addEventListener("click", () => colorDiv = listColors.value);
+listColors.addEventListener("click", () => { colorDiv = listColors.value; 
+                                            previousColorDiv = colorDiv;});
 color.appendChild(label);
 color.appendChild(listColors);
+
+
+// adding opacity checkbox
+
+let opacity = 1;
+const opacityCheckBox = document.querySelector("#opacityCheckbox");
+const opacityCheckBoxLabel = document.createElement("label");
+opacityCheckBoxLabel.textContent = "Apply progressive opacity";
+opacityCheckBoxLabel.setAttribute("for","opacityCheckbox");
+
+opacityCheckBox.addEventListener("click",() => {
+
+    if(opacityCheckBox.checked)
+        opacity = 0.1;
+    else
+        opacity = 1;
+});
+
+const userOptions = document.querySelector("#opacity");
+userOptions.appendChild(opacityCheckBoxLabel);
+
+
+
+
 
 
 
